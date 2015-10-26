@@ -10,12 +10,14 @@ class Function():
         self.functype = "Not Specified"
         return
 
-    def evaluate(self):
-        raise NotImplementedError()
+    def evaluate(self, func, x):
+        self.domain = x
+        self.codomain = func(x)
 
     def plot(self):
         if(self.dim_domain == 1 and self.dim_codomain == 1):
             plt.plot(self.domain, self.codomain)
             plt.title(self.functype)
+            plt.xlabel('x'); plt.ylabel('y')
             plt.show()
 

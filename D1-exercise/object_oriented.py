@@ -10,21 +10,22 @@ x = np.linspace(0,3,100)
 
 p1.evaluate(x)
 p1.plot()
-p2.evaluate(x)
-p2.plot()
-p3.evaluate(x)
-p3.plot()
+# p2.evaluate(x)
+# p2.plot()
+# p3.evaluate(x)
+# p3.plot()
 
 e = Ellipse(1, 2)
 e.evaluate(x)
 e.plot()
 
-# a = 1.
-# b = 20
+g = lambda z : np.sin(z)
 
-# e1 = 1.-(x/a)**2
-# domain = np.where(e1>0)
-# e1 = b*np.sqrt(e1[domain])
+x = np.linspace(0, 7, 100)
+
+my_f = Function()
+my_f.evaluate(g, x)
+my_f.plot()
 
 # plt.plot(x[domain],e1)
 # plt.grid()
