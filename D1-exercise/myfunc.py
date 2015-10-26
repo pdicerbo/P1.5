@@ -2,7 +2,7 @@ from mymodule import *
 
 class Parabola(Function):
     def __init__(self, a, b, c):
-        Function.__init__(self)
+        Function.__init__(self, 1, 1)
         self.a = a
         self.b = b
         self.c = c
@@ -15,7 +15,7 @@ class Parabola(Function):
 
 class Ellipse(Function):
     def __init__(self, a, b):
-        Function.__init__(self)
+        Function.__init__(self, 1, 1)
         self.a = a
         self.b = b
         self.functype = 'Ellipse'

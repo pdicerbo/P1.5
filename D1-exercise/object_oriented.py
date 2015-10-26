@@ -23,12 +23,15 @@ g = lambda z : np.sin(z)
 
 x = np.linspace(0, 7, 100)
 
-my_f = Function()
+my_f = Function(1, 1)
 my_f.evaluate(g, x)
 my_f.plot()
 
-# plt.plot(x[domain],e1)
-# plt.grid()
-# plt.show()
-#
+par = lambda x, y: 10*(x - 2)**2 + 5*(y - 2)**2 + 2. * x - 3. * y + 1
+
+three = Function(2, 1)
+three.evaluate(par, x)
+three.functype = "Paraboloid"
+three.plot()
+
 # For some reason i need here the p1 coefficents...
