@@ -42,7 +42,7 @@ rectangle::rectangle(const rectangle &obj)
 	height=obj.height;
 }
 
-rectangle &rectangle::operator=(const rectangle &obj)
+rectangle& rectangle::operator=(const rectangle &obj)
 {
 	cout << "Invoked assignment operator " << endl;
 	width=obj.width;
@@ -62,6 +62,6 @@ int main() {
   rectangle b(1.0,2.0);
   rectangle c=a;
   b=a;
- 
+
   return 0;
 }
