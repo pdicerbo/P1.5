@@ -33,11 +33,11 @@ rectangle::rectangle(const rectangle &obj)
 
 int main() {
   
-  rectangle a,b,c;
+  rectangle a;
   a.width=5.0;
   a.height=2.0;
-  b=rectangle(a);
-  c=a;	
+  rectangle b=rectangle(a);
+  rectangle c=a;	
   cout << a.area()  << endl;
   cout << b.area()  << endl;
   cout << c.area()  << endl;
