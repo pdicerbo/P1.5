@@ -10,6 +10,8 @@ class Matrix
   Matrix(int, int);
   ~Matrix();
   Matrix(const Matrix&);
+  void initialize(std::string);
+  void self_print();
  protected:
   Matrix();
 };
