@@ -12,6 +12,7 @@ class Matrix
   Matrix(const Matrix&);
   void initialize(std::string);
   void self_print();
+  Matrix& operator=(const Matrix&);
  protected:
   Matrix();
 };

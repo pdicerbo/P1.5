@@ -78,4 +78,30 @@ void Matrix::self_print(){
   cout << "\n";
 }
 
+Matrix &Matrix::operator=(const Matrix& ob){
+  cout << "\tInvoked assignment operator\n";
 
+  int ob_row = ob.get_row();
+  int ob_col = ob.get_col();
+
+  if (this == &ob){
+    cout << "\tWarning! You write something like a = a\n";
+    return *this;
+  }
+  else if(row_ * col_ != ob_row * ob_col){
+    delete [] matrix;
+    matrix = new double[ob_row * ob_col];
+    row_ = ob_row;
+    col_ = ob_col;
+  }
+  else{
+    row_ = ob_row;
+    col_ = ob_col;
+  }
+
+  for(int i = 0; i < ob_row; i++)
+    for(int j = 0; j < ob_col; j++)
+      matrix[j + i * ob_col] = ob.matrix[j + i*ob_col];
+
+  return *this;
+}

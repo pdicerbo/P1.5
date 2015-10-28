@@ -11,13 +11,15 @@ int main(int argc, char** argv){
   
   a.initialize("generic");
   a.self_print();
-  Matrix b = a;
+  //Matrix b = a;
+  Matrix b(2, 4);
+  b.initialize("generic");
+  b.self_print();
 
-  // string test = "num";
-  // if(test == "num")
-  //   cout << "\tOK! " << test << endl;
-  // else
-  //   cout << "damn " << test << endl;
+  b = a;
+
+  b.self_print();
+  b = b;
 
   // for identity initialization...
   // for(int i = 0; i < n_row; i++)
