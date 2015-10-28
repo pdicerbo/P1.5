@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 #include "MyMatrix.h"
 #include "cblas.h"
 
@@ -128,7 +129,15 @@ Matrix Matrix::operator*(const Matrix& ob) const{
       temp.matrix[i*n_col_b + j] = tmp_sum;
       tmp_sum = 0;
     }
-  }
-  
+  }  
   return temp;
+}
+
+double& Matrix::operator()(const int i, const int j){
+  if(i < 0 || j < 0 || i > row_ || j > col_){
+    cout << "\tIndex out of bounds\n\tExit\n";
+    exit(EXIT_FAILURE);
+    return matrix[j + i*col_];
+  }
+  return matrix[j + i*col_];
 }

@@ -15,7 +15,7 @@ int main(int argc, char** argv){
   Matrix b(2, 4);
   b.initialize("generic");
   b.self_print();
-  b*a;
+
   b = a;
 
   b.self_print();
@@ -26,6 +26,8 @@ int main(int argc, char** argv){
 
   c = a*b;
   c.self_print();
-
+  c(1, 1) = -1.;
+  c(-1, 0) = 2;
+  c.self_print();
   return 0;
 }

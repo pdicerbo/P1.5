@@ -14,6 +14,7 @@ class Matrix
   void self_print();
   Matrix& operator=(const Matrix&);
   Matrix operator*(const Matrix&) const;
+  double& operator()(const int, const int);
  protected:
   Matrix();
 };
