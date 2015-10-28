@@ -27,7 +27,7 @@ int main(int argc, char** argv){
   c = a*b;
   c.self_print();
   c(1, 1) = -1.;
-  c(-1, 0) = 2;
+  // c(-1, 0) = 2;
   c.self_print();
   return 0;
 }
