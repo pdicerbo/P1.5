@@ -32,9 +32,10 @@ rectangle::rectangle(const rectangle &obj)
 	height=obj.height;
 }
 
-void print_infos(rectangle a)
+rectangle print_infos(rectangle a)
 {
-     cout << " width= " << a.width << " height= " << a.height << endl; 
+     cout << " width= " << a.width << " height= " << a.height << endl;
+     return a;
 }
 
 int main() {

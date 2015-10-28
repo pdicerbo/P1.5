@@ -23,7 +23,7 @@ int main(){
    double c=1.0;
    double d=1.0;
    int rInt;
-   int rDouble;
+   double rDouble;
 
    rInt=op(a,b);
    cout<<" rInt=op(a,b) "<<rInt<<endl;
