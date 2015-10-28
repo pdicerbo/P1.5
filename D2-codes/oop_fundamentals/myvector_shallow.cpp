@@ -20,6 +20,10 @@ class myvector
 	~myvector();
 };
 
+myvector::myvector()
+{
+
+}
 
 myvector::myvector(int n)
 {

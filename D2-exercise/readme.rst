@@ -16,6 +16,6 @@ Write a matrix class.
 
 3. Separate class declaration, class implementation and main program. Provide a makefile
 
-4. (Optional) By overloading the () operator, provide safe access (i.e. bound check) to the matrix elements. (prototype    matrix matrix::operator()(const matrix& mat) )
+4. (Optional) By overloading the () operator, provide safe access (i.e. bound check) to the matrix elements. (prototype    float& matrix::operator()(const int i, const int j) )
 
 5. (Optional) Try to create a safe array overloading the [] operator, to achieve an indexing such that a[4][3]. Please notice that [][] is not an operator, only [] is. 
