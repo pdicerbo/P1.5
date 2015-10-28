@@ -15,20 +15,17 @@ int main(int argc, char** argv){
   Matrix b(2, 4);
   b.initialize("generic");
   b.self_print();
-
+  b*a;
   b = a;
 
   b.self_print();
-  b = b;
+  Matrix c(2,1);
+  // cout << "\n\nHERE BEFORE PRODUCT\n";  
+  // (a*b).self_print();
+  // cout << "\n\nHERE AFTER PRODUCT\n";  
 
-  // for identity initialization...
-  // for(int i = 0; i < n_row; i++)
-  //   for(int j = 0; j < n_col; j++){
-  //     if(i != j)
-  // 	matrix[j + i*n_col] = 0.;
-  //     else
-  // 	matrix[j + i*n_col] = 1.;
-  //   }
-  
+  c = a*b;
+  c.self_print();
+
   return 0;
 }

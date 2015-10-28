@@ -13,6 +13,7 @@ class Matrix
   void initialize(std::string);
   void self_print();
   Matrix& operator=(const Matrix&);
+  Matrix operator*(const Matrix&) const;
  protected:
   Matrix();
 };

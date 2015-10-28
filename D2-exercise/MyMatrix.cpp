@@ -1,5 +1,6 @@
 #include <iostream>
 #include "MyMatrix.h"
+#include "cblas.h"
 
 using namespace std;
 
@@ -104,4 +105,30 @@ Matrix &Matrix::operator=(const Matrix& ob){
       matrix[j + i * ob_col] = ob.matrix[j + i*ob_col];
 
   return *this;
+}
+
+Matrix Matrix::operator*(const Matrix& ob) const{
+  // matrix need to store multiplication
+
+  if(col_ != ob.get_row()){
+    Matrix temp(1, 1);
+    cout << "\tCan't perform the product; n_col(a) != n_row(b)\n";
+    return temp;
+  }
+  int n_col_b = ob.get_col();
+  Matrix temp(row_, n_col_b);
+
+  double tmp_sum = 0.;
+  
+  for(int i = 0; i < row_; i++){
+    for(int j = 0; j < n_col_b; j++){
+      for(int k = 0; k < col_; k++){
+	tmp_sum += matrix[i*col_ + k] * ob.matrix[k * n_col_b + j];
+      }
+      temp.matrix[i*n_col_b + j] = tmp_sum;
+      tmp_sum = 0;
+    }
+  }
+  
+  return temp;
 }
