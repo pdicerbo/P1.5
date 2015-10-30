@@ -10,7 +10,7 @@ class rectangle
         float width, height;
         float area();
         ~rectangle();
-        rectangle(int a, int b);
+        rectangle(float a, float b);
         rectangle(const rectangle &obj);
    protected:
         rectangle();
