@@ -12,7 +12,7 @@ rectangle::rectangle()
 	cout << " Invoked rectangle default constructor " << endl;
 }
 
-rectangle::rectangle(int a, int b)
+rectangle::rectangle(float a, float b)
 {
 	cout << " Invoked rectangle custom constructor " << endl;
 	width=a;

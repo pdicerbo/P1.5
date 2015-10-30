@@ -12,7 +12,7 @@ square::square()
 	cout << " Invoked square default constructor " << endl;
 }
 
-square::square(int a)
+square::square(float a)
 {
 	cout << " Invoked square custom constructor " << endl;
 	width=a;

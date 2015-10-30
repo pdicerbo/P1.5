@@ -9,7 +9,7 @@ class square : public rectangle
 {
    public:
         ~square();
-        square(int a);
+        square(float a);
 	float inscribed_area();
    private:
         square();
