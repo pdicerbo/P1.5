@@ -17,12 +17,12 @@ Requirments
   - implement in both matrix and squarematrix a virtual trace() method. For the matrix class this should just return 0.0 and maybe a warning. The following code should be giving the right result
     ::
 
-      squarematrix* a=new squarematrix(2);
+      squarematrix a(2);
       a(0,0)=3.0;
       a(1,0)=0.0;
       a(0,1)=2.0;
       a(1,1)=5.0;
-      matrix* b=a;
+      matrix* b=&a;
       b->trace();  //should give 8 and not 0
 
   - to be able to use the operator* of your base class, you need to define a copy constructor from matrix to squarematrix in your derived class
