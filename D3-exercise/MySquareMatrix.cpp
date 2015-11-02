@@ -6,27 +6,27 @@
 using namespace std;
 
 SquareMatrix::SquareMatrix(int a) : Matrix(a, a){
-
+#ifdef DEBUG
   cout << "\tInvoked SquareMatrix Constructor\n";
-
+#endif
 }
 
 SquareMatrix::~SquareMatrix(){
-
+#ifdef DEBUG
   cout << "\tInvoked SquareMatrix Destructor\n";
-  
+#endif  
 }
 
 SquareMatrix::SquareMatrix(const SquareMatrix& obj) : Matrix(obj) {
-
+#ifdef DEBUG
   cout << "\tInvoked SquareMatrix Copy Constructor\n";
-
+#endif
 }
 
 SquareMatrix::SquareMatrix(const Matrix& obj) : Matrix(obj) {
-
+#ifdef DEBUG
   cout << "\tInvoked the second SquareMatrix Copy Constructor\n";
-
+#endif
 }
 
 void SquareMatrix::initialize(string type){
@@ -34,7 +34,9 @@ void SquareMatrix::initialize(string type){
   int i_tmp;
 
   if(type == "generic"){
+#ifdef DEBUG
     cout << "\tInitializing matrix to growing number\n";
+#endif
     for(int i = 0; i < N; i++){
       i_tmp = i*N;
       for(int j = 0; j < N; j++)
@@ -42,7 +44,9 @@ void SquareMatrix::initialize(string type){
     }
   }
   else if(type == "identity"){
+#ifdef DEBUG
     cout << "\tInitializing matrix to Identity\n";
+#endif
     for(int i = 0; i < N; i++){
       i_tmp = i*N;
       for(int j = 0; j < N; j++)
@@ -53,7 +57,9 @@ void SquareMatrix::initialize(string type){
     }
   }
   else{
+#ifdef DEBUG
     cout << "\tInitializing matrix to zero\n";
+#endif
     for(int i = 0; i < N * N; i++)
       matrix[i] = 0.;
   }
