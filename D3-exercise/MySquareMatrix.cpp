@@ -58,3 +58,13 @@ void SquareMatrix::initialize(string type){
       matrix[i] = 0.;
   }
 }
+
+double SquareMatrix::trace(){
+
+  int N = get_row();
+  double tr = 0.;
+
+  for(int j = 0; j < N * N; j += N + 1)
+    tr += matrix[j];
+  return tr;
+}

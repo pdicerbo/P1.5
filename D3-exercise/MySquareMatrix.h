@@ -10,7 +10,8 @@ class SquareMatrix : public Matrix
   virtual ~SquareMatrix();
   SquareMatrix(const SquareMatrix&);
   SquareMatrix(const Matrix&);
-  virtual void initialize(std::string);
+  void initialize(std::string);
+  double trace();
 
  protected:
   SquareMatrix();

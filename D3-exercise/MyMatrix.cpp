@@ -150,3 +150,8 @@ double* Matrix::operator[](int i){
   }
   return matrix + i*col_;  
 }
+
+double Matrix::trace(){
+  cout << "\tWarning! Generic matrix can't call trace() method\n";
+  return 0;
+}
