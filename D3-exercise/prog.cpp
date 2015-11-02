@@ -5,7 +5,7 @@
 using namespace std;
 
 int main(int argc, char** argv){
-  Matrix a(4, 3);
+  Matrix a(5, 3);
 
   a.initialize("generic");
   a.self_print();

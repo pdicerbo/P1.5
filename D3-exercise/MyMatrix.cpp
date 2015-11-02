@@ -127,26 +127,26 @@ Matrix Matrix::operator*(const Matrix& ob) const{
     cout << "\tCan't perform the product; n_col(a) != n_row(b)\n";
     return temp;
   }
-  int n_col_b = ob.get_col(); // , i_tmp, i_sec;
+  int n_col_b = ob.get_col(), i_tmp, i_sec;
 
   // matrix needed to store multiplication
   Matrix temp(row_, n_col_b);
 
-  // double tmp_sum = 0.;
+  double tmp_sum = 0.;
   
-  // for(int i = 0; i < row_; i++){
-  //   i_tmp = i * col_;
-  //   i_sec = i * n_col_b;
-  //   for(int j = 0; j < n_col_b; j++){
-  //     for(int k = 0; k < col_; k++){
-  // 	tmp_sum += matrix[i_tmp + k] * ob.matrix[k * n_col_b + j];
-  //     }
-  //     temp.matrix[i_sec + j] = tmp_sum;
-  //     tmp_sum = 0;
-  //   }
-  // }
+  for(int i = 0; i < row_; i++){
+    i_tmp = i * col_;
+    i_sec = i * n_col_b;
+    for(int j = 0; j < n_col_b; j++){
+      for(int k = 0; k < col_; k++)
+  	tmp_sum += matrix[i_tmp + k] * ob.matrix[k * n_col_b + j];
 
-  cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, row_, n_col_b, col_, 1., matrix, col_, ob.matrix, n_col_b, 0., temp.matrix, n_col_b);
+      temp.matrix[i_sec + j] = tmp_sum;
+      tmp_sum = 0;
+    }
+  }
+  
+  // cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, row_, n_col_b, col_, 1., matrix, col_, ob.matrix, n_col_b, 0., temp.matrix, n_col_b);
   
   return temp;
 }
