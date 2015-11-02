@@ -116,17 +116,19 @@ Matrix Matrix::operator*(const Matrix& ob) const{
     cout << "\tCan't perform the product; n_col(a) != n_row(b)\n";
     return temp;
   }
-  int n_col_b = ob.get_col();
+  int n_col_b = ob.get_col(), i_tmp, i_sec;
   Matrix temp(row_, n_col_b);
 
   double tmp_sum = 0.;
   
   for(int i = 0; i < row_; i++){
+    i_tmp = i * col_;
+    i_sec = i * n_col_b;
     for(int j = 0; j < n_col_b; j++){
       for(int k = 0; k < col_; k++){
-	tmp_sum += matrix[i*col_ + k] * ob.matrix[k * n_col_b + j];
+	tmp_sum += matrix[i_tmp + k] * ob.matrix[k * n_col_b + j];
       }
-      temp.matrix[i*n_col_b + j] = tmp_sum;
+      temp.matrix[i_sec + j] = tmp_sum;
       tmp_sum = 0;
     }
   }

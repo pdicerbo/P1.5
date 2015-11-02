@@ -14,10 +14,16 @@ int main(int argc, char** argv){
   b.initialize("identity");
   b.self_print();
 
-  Matrix c(2,1);
+  // Matrix c(2,1);
 
-  c = a*b;
-  c.self_print();
+  // c = a*b;
+  // c.self_print();
+
+  SquareMatrix d(3);
+  d.initialize("generic");
+
+  SquareMatrix res = d*b;
+  res.self_print();
   
   return 0;
 }

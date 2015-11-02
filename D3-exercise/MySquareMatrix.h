@@ -7,7 +7,7 @@ class SquareMatrix : public Matrix
   
  public:
   SquareMatrix(int);
-  virtual ~SquareMatrix();
+  ~SquareMatrix();
   SquareMatrix(const SquareMatrix&);
   SquareMatrix(const Matrix&);
   void initialize(std::string);

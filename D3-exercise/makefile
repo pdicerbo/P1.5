@@ -5,7 +5,7 @@ all=prog.x
 prog.x: prog.o MyMatrix.o MySquareMatrix.o
 	$(CC) $^ -o $@
 
-prog.o: prog.cpp MyMatrix.h
+prog.o: prog.cpp
 	$(CC) -c $<
 
 %.o: %.cpp %.h

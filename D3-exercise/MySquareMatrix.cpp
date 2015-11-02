@@ -34,7 +34,7 @@ void SquareMatrix::initialize(string type){
   int i_tmp;
 
   if(type == "generic"){
-    cout << "\tInitializing matrix to growing number";
+    cout << "\tInitializing matrix to growing number\n";
     for(int i = 0; i < N; i++){
       i_tmp = i*N;
       for(int j = 0; j < N; j++)
@@ -42,7 +42,7 @@ void SquareMatrix::initialize(string type){
     }
   }
   else if(type == "identity"){
-    cout << "\tInitializing matrix to growing number";
+    cout << "\tInitializing matrix to Identity\n";
     for(int i = 0; i < N; i++){
       i_tmp = i*N;
       for(int j = 0; j < N; j++)
