@@ -22,7 +22,7 @@ int main()
   		std::cout << "Element not found in myvector\n";
 
 
-        for ( it = a.begin() ; it <= a.end(); it++)
+        for ( it = a.begin() ; it != a.end(); it++)
                 std::cout << *it << std::endl;
 	
 
