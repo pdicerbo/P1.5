@@ -80,3 +80,7 @@ MyType SquareMatrix<MyType>::trace(){
     tr += matrix[j];
   return tr;
 }
+
+template class SquareMatrix<double>;
+template class SquareMatrix<float>;
+//template class SquareMatrix<int>;

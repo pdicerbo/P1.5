@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <fstream>
 #include "MyMatrix.h"
 
 #ifdef USEBLAS
@@ -24,7 +25,7 @@ Matrix<MyType>::Matrix(int a, int b){
 #endif
   row_ = a;
   col_ = b;
-  matrix = new double[a * b];
+  matrix = new MyType[a * b];
 }
 
 // destructor
@@ -44,7 +45,7 @@ Matrix<MyType>::Matrix(const Matrix &obj){
 #endif
   row_ = obj.get_row();
   col_ = obj.get_col();
-  matrix = new double[row_ * col_];
+  matrix = new MyType[row_ * col_];
   int n_row = row_;
   int n_col = col_;
 
@@ -116,7 +117,7 @@ Matrix<MyType>& Matrix<MyType>::operator=(const Matrix& ob){
   }
   else if(row_ * col_ != ob_row * ob_col){
     delete [] matrix;
-    matrix = new double[ob_row * ob_col];
+    matrix = new MyType[ob_row * ob_col];
     row_ = ob_row;
     col_ = ob_col;
   }
@@ -145,6 +146,36 @@ Matrix<MyType> Matrix<MyType>::operator*(const Matrix& ob) const{
   // matrix needed to store multiplication
   Matrix<MyType> temp(row_, n_col_b);
 
+  double tmp_sum = 0.;
+  int i_tmp, i_sec;
+  
+  for(int i = 0; i < row_; i++){
+    i_tmp = i * col_;
+    i_sec = i * n_col_b;
+    for(int j = 0; j < n_col_b; j++){
+      for(int k = 0; k < col_; k++){
+  	tmp_sum += matrix[i_tmp + k] * ob.matrix[k * n_col_b + j];
+      }
+      temp.matrix[i_sec + j] = tmp_sum;
+      tmp_sum = 0;
+    }
+  }
+  return temp;
+}
+
+template<>
+Matrix<double> Matrix<double>::operator*(const Matrix& ob) const{
+
+  if(col_ != ob.get_row()){
+    Matrix<double> temp(1, 1);
+    cout << "\tCan't perform the product; n_col(a) != n_row(b)\n";
+    return temp;
+  }
+  int n_col_b = ob.get_col();
+
+  // matrix needed to store multiplication
+  Matrix<double> temp(row_, n_col_b);
+
 #ifdef USEBLAS
   cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, row_, n_col_b, col_, 1., matrix, col_, ob.matrix, n_col_b, 0., temp.matrix, n_col_b);
 #else
@@ -165,6 +196,41 @@ Matrix<MyType> Matrix<MyType>::operator*(const Matrix& ob) const{
 #endif
   return temp;
 }
+
+template<>
+Matrix<float> Matrix<float>::operator*(const Matrix& ob) const{
+
+  if(col_ != ob.get_row()){
+    Matrix<float> temp(1, 1);
+    cout << "\tCan't perform the product; n_col(a) != n_row(b)\n";
+    return temp;
+  }
+  int n_col_b = ob.get_col();
+
+  // matrix needed to store multiplication
+  Matrix<float> temp(row_, n_col_b);
+
+#ifdef USEBLAS
+  cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, row_, n_col_b, col_, 1., matrix, col_, ob.matrix, n_col_b, 0., temp.matrix, n_col_b);
+#else
+  double tmp_sum = 0.;
+  int i_tmp, i_sec;
+  
+  for(int i = 0; i < row_; i++){
+    i_tmp = i * col_;
+    i_sec = i * n_col_b;
+    for(int j = 0; j < n_col_b; j++){
+      for(int k = 0; k < col_; k++){
+  	tmp_sum += matrix[i_tmp + k] * ob.matrix[k * n_col_b + j];
+      }
+      temp.matrix[i_sec + j] = tmp_sum;
+      tmp_sum = 0;
+    }
+  }
+#endif
+  return temp;
+}
+
 
 template<typename MyType>
 MyType& Matrix<MyType>::operator()(const int i, const int j){
@@ -191,3 +257,36 @@ MyType Matrix<MyType>::trace(){
   cout << "\tWarning! Generic matrix can't call trace() method\n";
   return 0;
 }
+
+template<typename MyType>
+void Matrix<MyType>::print_to_file(ofstream &output) const{
+
+  int nrow = get_row();
+  int ncol = get_col();
+  int i_tmp;
+  
+  for(int i = 0; i < nrow; i++){
+
+    i_tmp = i * ncol;
+
+    for(int j = 0; j < ncol; j++)
+      output << " " << matrix[i_tmp + j]; // << "\t";
+
+    output << "\n";
+  }
+}
+
+template<typename MyType>
+void Matrix<MyType>::non_zero_init(){
+
+  int nrow = get_row();
+  int ncol = get_col();
+
+  for(int i = 0; i < nrow; i++)
+    for(int j = 0; j < ncol; j++)
+      matrix[i*ncol + j] = i * ncol + j + 1.;
+}
+
+template class Matrix<double>;
+template class Matrix<float>;
+template class Matrix<int>;

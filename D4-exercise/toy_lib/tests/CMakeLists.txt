@@ -25,7 +25,7 @@ foreach(dir ${test_dirs})
     get_filename_component(name ${filename} NAME_WE)
     file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${dir}/${name})
     add_executable(${dir}/${name}.exe EXCLUDE_FROM_ALL ${dir}/${name}.cpp)
-    target_link_libraries (${dir}/${name}.exe ${EXTRA_LIBS} blas)
+    target_link_libraries (${dir}/${name}.exe ${EXTRA_LIBS} cblas)
   endforeach()
 endforeach()
 

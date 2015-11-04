@@ -5,7 +5,12 @@ if(BLAS_FOUND)
 endif(BLAS_FOUND)
 
 
-add_library(lac matrix.cpp)
+add_library(lac MyMatrix.cpp)
+
+if(BLAS_FOUND)
+    target_link_libraries(lac cblas)
+endif(BLAS_FOUND)
+
 
 install (TARGETS lac DESTINATION bin)
-install (FILES matrix.h DESTINATION include)
+install (FILES MyMatrix.h DESTINATION include)
