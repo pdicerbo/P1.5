@@ -1,0 +1,16 @@
+void Matrix::print_to_file(std::ofstream &output_file) const
+{
+	for (int i=0; i<m_n;i++)
+		{
+		for (int j=0; j<m_m; j++)
+                	output_file << " " << data[i*m_m+j];
+      		output_file<<std::endl;
+		}
+}
+
+void Matrix::non_zero_init()
+{
+	for (int i=0; i<m_n;i++)
+		for (int j=0; j<m_m; j++)
+			data[i*m_m+j]=i*m_m+j+1.;
+}

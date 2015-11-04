@@ -3,6 +3,8 @@
 template<>
 array<double,2> HyperBall<2>::evaluate(array<double,2> & point)
 {
+
+cout << "iam a ball" <<endl;
     double r = point[0];
     double theta = point[1];
 
