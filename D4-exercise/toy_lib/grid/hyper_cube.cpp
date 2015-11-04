@@ -3,6 +3,7 @@
 template<int dim>
 HyperCube<dim>::HyperCube(array<double,dim> & l, array<int,dim> & ni)
 {
+cout << "i am a cube "  << endl;
     length = l;
     n_intervals = ni;
     for (int i = 0; i < dim; i++)
