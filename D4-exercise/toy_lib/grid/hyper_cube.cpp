@@ -55,3 +55,6 @@ array<int,dim> HyperCube<dim>::flat_to_dim_id(int n_el)
 
     return dim_id;
 };
+
+template class HyperCube<2>;
+template class HyperCube<3>;
