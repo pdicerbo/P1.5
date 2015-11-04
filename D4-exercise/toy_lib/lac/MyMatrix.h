@@ -1,5 +1,6 @@
 #ifndef MYMATRIX_HEADER
 #define MYMATRIX_HEADER
+
 #include <fstream>
 
 template <typename MyType>
