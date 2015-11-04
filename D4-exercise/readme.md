@@ -45,7 +45,10 @@ Errors while running CTest
 ```
 
 
-### Assignment 0 `grid-hyper_cube_00` revieals a bug. Solve it and make the test pass.
+### Assignment 0 
+
+`grid-hyper_cube_00` revieals a bug. Solve it and make the test pass.
+
 ### Assignment 1  
 Make a template version of your matrix and squarematrix classes, such that the blockdata can be of arbitrary type.
 The declaration of your matrix and square matrix object would be then
