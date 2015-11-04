@@ -12,9 +12,9 @@ int main()
 		std::cout << *myIt << std::endl;
 
 	std::cout << "---" << std::endl;
-	a.erase(a.begin(), a.begin()+2);
+       	a.erase(a.begin(), a.begin()+2);
 
-        for ( myIt = a.begin() ; myIt <= a.end(); myIt++)
+        for ( myIt = a.begin() ; myIt != a.end(); myIt++)
                 std::cout << *myIt << std::endl;
 	
         std::cout << "---" << std::endl;
