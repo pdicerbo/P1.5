@@ -78,10 +78,13 @@ Optimize the provided wrapper, so that the private attribute is an `std::shared_
 
 Use an stl vector to containt 2 (or more) pointers to matrix (base)  class like 
 ```
-Matrix<double> a(3,4);
-SquareMatrix<double> b(4);
+matrix<double> a(3,4);
+squareMatrix<double> b(4);
+matrix<double>* pa=&a;
+matrix<double>* pb=&b;
 std::vector< matrix<double>* > vec;
-vec.push_back(&a);
+vec.push_back(pa);
+vec.push_back(pb);
 ```
 Iterate through the vector using iterators and, by dereferencing the iterator and calling the trace(), check that the polymorphism works.
 
