@@ -43,11 +43,6 @@ public:
 
     const auto b = B.get_boost_matrix();
 
-    // boost::timer t;
-    // matrix<T> tmp = prod(*mat, *b);
-    // cout << "\n\n\telapsed" << t.elapsed() << "\n";
-    // BoostMatrix<T> c = tmp;
-
     BoostMatrix<T> c = matrix<T>( prod(*mat, *b) );
     
     return c;
