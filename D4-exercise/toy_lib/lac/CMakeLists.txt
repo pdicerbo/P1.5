@@ -5,7 +5,7 @@ if(BLAS_FOUND)
 endif(BLAS_FOUND)
 
 
-add_library(lac MyMatrix.cpp)
+add_library(lac MyMatrix.cpp MySquareMatrix.cpp)
 
 install (TARGETS lac DESTINATION bin)
-install (FILES MyMatrix.h DESTINATION include)
+install (FILES MyMatrix.h MySquareMatrix.h DESTINATION include)

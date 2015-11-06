@@ -1,4 +1,7 @@
 #include "MyMatrix.h"
+#include "MySquareMatrix.h"
+#include <vector>
+
 #include <typeinfo>
 
 #include <boost/timer.hpp>
@@ -31,17 +34,17 @@ public:
     cout << mat << endl;
   };
   
-  matrix<T> get_boost_matrix() const
+  matrix<T> & get_boost_matrix()
   {
     return mat;
   };
   
-  const BoostMatrix<T> operator*(const BoostMatrix<T>& B) const
+  const BoostMatrix<T> operator*(BoostMatrix<T>& B) const
   {
     const auto b = B.get_boost_matrix();
     auto c = prod(mat, b);
     
-    return BoostMatrix<T>(c);
+    return BoostMatrix<T>( c );
   };
   
   
@@ -53,6 +56,9 @@ template<class M>
 double run_test(const int m, const int k, const int l)
 {
   M matrix1(m, k), matrix2(k, l), res(m, l);
+  matrix1.non_zero_init();
+  matrix2.non_zero_init();
+
   boost::timer t;
   res = matrix1 * matrix2;
   return t.elapsed();
@@ -60,7 +66,27 @@ double run_test(const int m, const int k, const int l)
 
 int main()
 {
-  cout << "boost matrix time = " << run_test<BoostMatrix<float>>(800,600,500) << endl;
-  cout << "in house matrix time = " << run_test<Matrix<float>>(800,600,500) << endl;
+
+  Matrix<double> a(3,4);
+  SquareMatrix<double> b(4);
+
+  a.initialize("generic");
+  b.initialize("generic");
+
+  a.self_print();
+
+  b.self_print();
+
+  std::vector< Matrix<double>* > vec;
+  vec.push_back(&a);
+  vec.push_back(&b);
+
+  std::vector<Matrix<double>*>::iterator MyIt;
+
+  for(MyIt = vec.begin(); MyIt != vec.end(); MyIt++)
+    cout << (*MyIt) -> trace() << endl;
+
+  // cout << "boost matrix time = " << run_test<BoostMatrix<float>>(800,600,500) << endl;
+  // cout << "in house matrix time = " << run_test<Matrix<float>>(800,600,500) << endl;
   return 0;
 }

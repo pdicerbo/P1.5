@@ -35,7 +35,7 @@ SquareMatrix<MyType>::SquareMatrix(const Matrix<MyType>& obj) : Matrix<MyType>(o
 
 template<typename MyType>
 void SquareMatrix<MyType>::initialize(string type){
-  int N = get_row();
+  int N = this -> get_row();
   int i_tmp;
 
   if(type == "generic"){
@@ -45,7 +45,7 @@ void SquareMatrix<MyType>::initialize(string type){
     for(int i = 0; i < N; i++){
       i_tmp = i*N;
       for(int j = 0; j < N; j++)
-	matrix[j + i_tmp] = j + i_tmp;
+	this -> matrix[j + i_tmp] = j + i_tmp;
     }
   }
   else if(type == "identity"){
@@ -56,9 +56,9 @@ void SquareMatrix<MyType>::initialize(string type){
       i_tmp = i*N;
       for(int j = 0; j < N; j++)
 	if(i == j)
-	  matrix[j + i_tmp] = 1.;
+	  this -> matrix[j + i_tmp] = 1.;
         else
-	  matrix[j + i_tmp] = 0.;
+	  this -> matrix[j + i_tmp] = 0.;
     }
   }
   else{
@@ -66,18 +66,18 @@ void SquareMatrix<MyType>::initialize(string type){
     cout << "\tInitializing matrix to zero\n";
 #endif
     for(int i = 0; i < N * N; i++)
-      matrix[i] = 0.;
+      this -> matrix[i] = 0.;
   }
 }
 
 template<typename MyType>
 MyType SquareMatrix<MyType>::trace(){
 
-  int N = get_row();
+  int N = this -> get_row();
   double tr = 0.;
 
   for(int j = 0; j < N * N; j += N + 1)
-    tr += matrix[j];
+    tr += this -> matrix[j];
   return tr;
 }
 
