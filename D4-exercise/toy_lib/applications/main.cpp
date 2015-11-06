@@ -33,7 +33,7 @@ public:
     cout << *mat << endl;
   };
   
-  shared_ptr< matrix<T>> get_boost_matrix()
+  shared_ptr< matrix<T> > get_boost_matrix()
   {
     return mat;
   };
