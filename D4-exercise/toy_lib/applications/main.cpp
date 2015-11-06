@@ -16,40 +16,46 @@ template<class T>
 class BoostMatrix
 {
 public:
-  BoostMatrix(unsigned int m,unsigned int n) : mat(m,n)
-  {};
-  
-  BoostMatrix(const matrix<T> &in) : mat(in)
-  {};
+  BoostMatrix(unsigned int m,unsigned int n)
+  {mat = make_shared< matrix<T> >(m, n);}
+
+  BoostMatrix(const matrix<T> &in)
+  { mat = make_shared< matrix<T> >(in); };
   
   void non_zero_init() {
-    
-        for (unsigned int i=0; i<mat.size1(); i++)
-	  for (unsigned int j=0; j<mat.size2(); j++)
-	    mat(i,j)=i*mat.size1()+j+1.;
+    for (unsigned int i=0; i < mat -> size1(); i++)
+      for (unsigned int j=0; j < mat -> size2(); j++)
+  	(*mat)(i,j)=i*mat -> size1()+j+1.;
   };
   
   void print()
   {
-    cout << mat << endl;
+    cout << *mat << endl;
   };
   
-  matrix<T> & get_boost_matrix()
+  shared_ptr< matrix<T>> get_boost_matrix()
   {
     return mat;
   };
   
   const BoostMatrix<T> operator*(BoostMatrix<T>& B) const
   {
+
     const auto b = B.get_boost_matrix();
-    auto c = prod(mat, b);
+
+    // boost::timer t;
+    // matrix<T> tmp = prod(*mat, *b);
+    // cout << "\n\n\telapsed" << t.elapsed() << "\n";
+    // BoostMatrix<T> c = tmp;
+
+    BoostMatrix<T> c = matrix<T>( prod(*mat, *b) );
     
-    return BoostMatrix<T>( c );
+    return c;
   };
   
   
 private:
-  matrix<T> mat;
+  shared_ptr< matrix<T> > mat;
 };
 
 template<class M>
@@ -74,7 +80,6 @@ int main()
   b.initialize("generic");
 
   a.self_print();
-
   b.self_print();
 
   std::vector< Matrix<double>* > vec;
@@ -84,9 +89,11 @@ int main()
   std::vector<Matrix<double>*>::iterator MyIt;
 
   for(MyIt = vec.begin(); MyIt != vec.end(); MyIt++)
-    cout << (*MyIt) -> trace() << endl;
+    cout << "\t" << (*MyIt) -> trace() << endl;
 
-  // cout << "boost matrix time = " << run_test<BoostMatrix<float>>(800,600,500) << endl;
-  // cout << "in house matrix time = " << run_test<Matrix<float>>(800,600,500) << endl;
+  // Test
+  cout << endl;
+  cout << "\tboost matrix time = " << run_test<BoostMatrix<float>>(800,600,500) << endl;
+  cout << "\tin house matrix time = " << run_test<Matrix<float>>(800,600,500) << endl;
   return 0;
 }
