@@ -6,7 +6,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 add_subdirectory (grid)
 
-option(DEBUG "Add debug" ON)
+#option(DEBUG "Add debug" ON)
+option(DEBUG "Add debug" OFF)
 
 if(DEBUG)
         add_definitions(-g -DDEBUG)

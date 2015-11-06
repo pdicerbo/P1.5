@@ -15,5 +15,5 @@ find_package(BLAS)
 
 if(BLAS_FOUND)
     add_executable(time_testing_blas main.cpp)
-    target_link_libraries(time_testing_blas ${EXTRA_LIBS} blas ${Boost_LIBRARIES})
+    target_link_libraries(time_testing_blas ${EXTRA_LIBS} cblas ${Boost_LIBRARIES})
 endif(BLAS_FOUND)
