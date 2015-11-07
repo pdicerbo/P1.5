@@ -137,9 +137,9 @@ template<typename MyType>
 Matrix<MyType> Matrix<MyType>::operator*(const Matrix& ob) const{
 
   if(col_ != ob.get_row()){
-    Matrix<MyType> temp(1, 1);
-    cout << "\tCan't perform the product; n_col(a) != n_row(b)\n";
-    return temp;
+    cout << "\tCan't perform the product; n_col(a) != n_row(b)\n\tExit!\n";
+    exit(0);
+    return *this;
   }
   int n_col_b = ob.get_col();
 
@@ -167,9 +167,9 @@ template<>
 Matrix<double> Matrix<double>::operator*(const Matrix& ob) const{
 
   if(col_ != ob.get_row()){
-    Matrix<double> temp(1, 1);
-    cout << "\tCan't perform the product; n_col(a) != n_row(b)\n";
-    return temp;
+    cout << "\tCan't perform the product; n_col(a) != n_row(b)\n\tExit!\n";
+    exit(0);
+    return *this;
   }
   int n_col_b = ob.get_col();
 
@@ -201,9 +201,9 @@ template<>
 Matrix<float> Matrix<float>::operator*(const Matrix& ob) const{
 
   if(col_ != ob.get_row()){
-    Matrix<float> temp(1, 1);
-    cout << "\tCan't perform the product; n_col(a) != n_row(b)\n";
-    return temp;
+    cout << "\tCan't perform the product; n_col(a) != n_row(b)\n\tExit!\n";
+    exit(0);
+    return *this;
   }
   int n_col_b = ob.get_col();
 
@@ -213,16 +213,16 @@ Matrix<float> Matrix<float>::operator*(const Matrix& ob) const{
 #ifdef USEBLAS
   cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, row_, n_col_b, col_, 1., matrix, col_, ob.matrix, n_col_b, 0., temp.matrix, n_col_b);
 #else
-  double tmp_sum = 0.;
+  float tmp_sum = 0.;
   int i_tmp, i_sec;
   
   for(int i = 0; i < row_; i++){
     i_tmp = i * col_;
     i_sec = i * n_col_b;
     for(int j = 0; j < n_col_b; j++){
-      for(int k = 0; k < col_; k++){
+      for(int k = 0; k < col_; k++)
   	tmp_sum += matrix[i_tmp + k] * ob.matrix[k * n_col_b + j];
-      }
+      
       temp.matrix[i_sec + j] = tmp_sum;
       tmp_sum = 0;
     }
@@ -231,6 +231,106 @@ Matrix<float> Matrix<float>::operator*(const Matrix& ob) const{
   return temp;
 }
 
+template<typename MyType>
+Matrix<MyType>& Matrix<MyType>::operator*=(const Matrix& mat){
+
+  if(col_ != mat.get_row()){
+    cout << "\tCan't perform the product; n_col(a) != n_row(b)\n\tExit!\n";
+    exit(0);
+    return *this;
+  }
+  
+  Matrix<MyType> temp(row_, mat.get_col());
+  MyType tmp_sum = 0.;
+  int i_tmp, i_sec;
+  int n_col_b = mat.get_col();
+  
+  for(int i = 0; i < row_; i++){
+    i_tmp = i * col_;
+    i_sec = i * n_col_b;
+    for(int j = 0; j < n_col_b; j++){
+      for(int k = 0; k < col_; k++)
+  	tmp_sum += matrix[i_tmp + k] * mat.matrix[k * n_col_b + j];
+      
+      temp.matrix[i_sec + j] = tmp_sum;
+      tmp_sum = 0;
+    }
+  }
+  *this = temp;
+  return *this;
+}
+
+template<>
+Matrix<double>& Matrix<double>::operator*=(const Matrix& mat){
+
+  if(col_ != mat.get_row()){
+    cout << "\tCan't perform the product; n_col(a) != n_row(b)\n\tExit!\n";
+    exit(0);
+    return *this;
+  }
+
+  Matrix<double> temp(row_, mat.get_col());
+  int n_col_b = mat.get_col();
+
+#ifdef USEBLAS
+  cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, row_, n_col_b, col_, 1., matrix, col_, mat.matrix, n_col_b, 0., temp.matrix, n_col_b);
+#else
+  
+  double tmp_sum = 0.;
+  int i_tmp, i_sec;
+  
+  for(int i = 0; i < row_; i++){
+    i_tmp = i * col_;
+    i_sec = i * n_col_b;
+    for(int j = 0; j < n_col_b; j++){
+      for(int k = 0; k < col_; k++)
+  	tmp_sum += matrix[i_tmp + k] * mat.matrix[k * n_col_b + j];
+      
+      temp.matrix[i_sec + j] = tmp_sum;
+      tmp_sum = 0;
+    }
+  }
+#endif
+
+  *this = temp;
+  return *this;
+}
+
+template<>
+Matrix<float>& Matrix<float>::operator*=(const Matrix& mat){
+
+  if(col_ != mat.get_row()){
+    cout << "\tCan't perform the product; n_col(a) != n_row(b)\n\tExit!\n";
+    exit(0);
+    return *this;
+  }
+
+  Matrix<float> temp(row_, mat.get_col());
+  int n_col_b = mat.get_col();
+
+#ifdef USEBLAS
+  cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, row_, n_col_b, col_, 1., matrix, col_, mat.matrix, n_col_b, 0., temp.matrix, n_col_b);
+#else
+
+  float tmp_sum = 0.;
+  int i_tmp, i_sec;
+  
+  for(int i = 0; i < row_; i++){
+    i_tmp = i * col_;
+    i_sec = i * n_col_b;
+    for(int j = 0; j < n_col_b; j++){
+      for(int k = 0; k < col_; k++)
+  	tmp_sum += matrix[i_tmp + k] * mat.matrix[k * n_col_b + j];
+      
+      temp.matrix[i_sec + j] = tmp_sum;
+      tmp_sum = 0;
+    }
+  }
+
+#endif
+  *this = temp;
+  return *this;
+}
 
 template<typename MyType>
 MyType& Matrix<MyType>::operator()(const int i, const int j){

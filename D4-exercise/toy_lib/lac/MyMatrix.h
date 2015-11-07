@@ -23,6 +23,7 @@ class Matrix
   Matrix operator*(const Matrix&) const;
   MyType& operator()(const int, const int);
   MyType* operator[](const int);
+  Matrix& operator*=(const Matrix&);
   void print_to_file(std::ofstream &) const;
   void non_zero_init();
  protected:

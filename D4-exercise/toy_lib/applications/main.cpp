@@ -70,13 +70,20 @@ int main()
 
   Matrix<double> a(3,4);
   SquareMatrix<double> b(4);
-
+  Matrix<double> c(4,1);
+  
   a.initialize("generic");
   b.initialize("generic");
-
+  c.initialize("generic");
+  
   a.self_print();
   b.self_print();
-
+  c.self_print();
+  
+  a *= c;
+  cout << "\n\tPrinting a *= c\n";
+  a.self_print();
+  
   std::vector< Matrix<double>* > vec;
   vec.push_back(&a);
   vec.push_back(&b);
@@ -87,8 +94,8 @@ int main()
     cout << "\t" << (*MyIt) -> trace() << endl;
 
   // Test
-  cout << endl;
-  cout << "\tboost matrix time = " << run_test<BoostMatrix<float>>(800,600,500) << endl;
-  cout << "\tin house matrix time = " << run_test<Matrix<float>>(800,600,500) << endl;
+  // cout << endl;
+  // cout << "\tboost matrix time = " << run_test<BoostMatrix<float>>(800,600,500) << endl;
+  // cout << "\tin house matrix time = " << run_test<Matrix<float>>(800,600,500) << endl;
   return 0;
 }
