@@ -274,7 +274,14 @@ MyType* Matrix<MyType>::operator[](int i){
 
 template<typename MyType>
 MyType Matrix<MyType>::trace(){
-  cout << "\tWarning! Generic matrix can't call trace() method\n";
+  if(row_ == col_){
+    MyType tr = 0.;
+    for(int i = 0; i < row_ * col_; i += col_ + 1)
+      tr += matrix[i];
+    return tr;
+  }
+  else
+    cout << "\tWarning! Generic matrix can't call trace() method\n";
   return 0;
 }
 
