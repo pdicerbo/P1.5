@@ -144,90 +144,10 @@ Matrix<MyType> Matrix<MyType>::operator*(const Matrix& ob) const{
   int n_col_b = ob.get_col();
 
   // matrix needed to store multiplication
-  Matrix<MyType> temp(row_, n_col_b);
+  Matrix<MyType> temp = *this;
 
-  double tmp_sum = 0.;
-  int i_tmp, i_sec;
+  temp *= ob;
   
-  for(int i = 0; i < row_; i++){
-    i_tmp = i * col_;
-    i_sec = i * n_col_b;
-    for(int j = 0; j < n_col_b; j++){
-      for(int k = 0; k < col_; k++){
-  	tmp_sum += matrix[i_tmp + k] * ob.matrix[k * n_col_b + j];
-      }
-      temp.matrix[i_sec + j] = tmp_sum;
-      tmp_sum = 0;
-    }
-  }
-  return temp;
-}
-
-template<>
-Matrix<double> Matrix<double>::operator*(const Matrix& ob) const{
-
-  if(col_ != ob.get_row()){
-    cout << "\tCan't perform the product; n_col(a) != n_row(b)\n\tExit!\n";
-    exit(0);
-    return *this;
-  }
-  int n_col_b = ob.get_col();
-
-  // matrix needed to store multiplication
-  Matrix<double> temp(row_, n_col_b);
-
-#ifdef USEBLAS
-  cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, row_, n_col_b, col_, 1., matrix, col_, ob.matrix, n_col_b, 0., temp.matrix, n_col_b);
-#else
-  double tmp_sum = 0.;
-  int i_tmp, i_sec;
-  
-  for(int i = 0; i < row_; i++){
-    i_tmp = i * col_;
-    i_sec = i * n_col_b;
-    for(int j = 0; j < n_col_b; j++){
-      for(int k = 0; k < col_; k++){
-  	tmp_sum += matrix[i_tmp + k] * ob.matrix[k * n_col_b + j];
-      }
-      temp.matrix[i_sec + j] = tmp_sum;
-      tmp_sum = 0;
-    }
-  }
-#endif
-  return temp;
-}
-
-template<>
-Matrix<float> Matrix<float>::operator*(const Matrix& ob) const{
-
-  if(col_ != ob.get_row()){
-    cout << "\tCan't perform the product; n_col(a) != n_row(b)\n\tExit!\n";
-    exit(0);
-    return *this;
-  }
-  int n_col_b = ob.get_col();
-
-  // matrix needed to store multiplication
-  Matrix<float> temp(row_, n_col_b);
-
-#ifdef USEBLAS
-  cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, row_, n_col_b, col_, 1., matrix, col_, ob.matrix, n_col_b, 0., temp.matrix, n_col_b);
-#else
-  float tmp_sum = 0.;
-  int i_tmp, i_sec;
-  
-  for(int i = 0; i < row_; i++){
-    i_tmp = i * col_;
-    i_sec = i * n_col_b;
-    for(int j = 0; j < n_col_b; j++){
-      for(int k = 0; k < col_; k++)
-  	tmp_sum += matrix[i_tmp + k] * ob.matrix[k * n_col_b + j];
-      
-      temp.matrix[i_sec + j] = tmp_sum;
-      tmp_sum = 0;
-    }
-  }
-#endif
   return temp;
 }
 

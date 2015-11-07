@@ -94,8 +94,8 @@ int main()
     cout << "\t" << (*MyIt) -> trace() << endl;
 
   // Test
-  // cout << endl;
-  // cout << "\tboost matrix time = " << run_test<BoostMatrix<float>>(800,600,500) << endl;
-  // cout << "\tin house matrix time = " << run_test<Matrix<float>>(800,600,500) << endl;
+  cout << endl;
+  cout << "\tboost matrix time = " << run_test<BoostMatrix<float>>(800,600,500) << endl;
+  cout << "\tin house matrix time = " << run_test<Matrix<float>>(800,600,500) << endl;
   return 0;
 }
