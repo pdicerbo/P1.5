@@ -4,7 +4,7 @@ LIBS=-lcblas
 
 all=prog.x
 
-prog.x: prog.o MyMatrix.o MySquareMatrix.o
+prog.x: prog.o MyMatrix.o MySquareMatrix.o FactoryMatrix.o
 	$(CC) $^ $(LIBS) -o $@
 
 prog.o: prog.cpp
