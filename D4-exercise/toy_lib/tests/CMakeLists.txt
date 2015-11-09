@@ -16,7 +16,7 @@ set (EXTRA_LIBS ${EXTRA_LIBS} $ENV{TOY_LIB_PATH}/bin/liblac.a)
 find_package(BLAS)
 if(BLAS_FOUND)
 
-set (test_dirs grid base lac)
+set (test_dirs grid base lac mytest)
 
 foreach(dir ${test_dirs})
   file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${dir})

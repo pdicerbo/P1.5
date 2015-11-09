@@ -34,7 +34,7 @@ three.evaluate(par, x)
 three.functype = "Paraboloid"
 three.plot()
 
-osc = lambda x, y: np.sin(x + y)
+osc = lambda x, y: np.sin(x)*np.cos(y)
 
 y = np.linspace(0, 10, 500)
 new_f = Function(2, 1)

@@ -83,4 +83,4 @@ MyType SquareMatrix<MyType>::trace(){
 
 template class SquareMatrix<double>;
 template class SquareMatrix<float>;
-//template class SquareMatrix<int>;
+template class SquareMatrix<int>;
