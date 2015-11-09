@@ -12,3 +12,5 @@ Matrix<MyType>* CreateMat(const int a, const int b){
 }
 
 template Matrix<double>* CreateMat<double>(const int, const int);
+template Matrix<float>* CreateMat<float>(const int, const int);
+template Matrix<int>* CreateMat<int>(const int, const int);
