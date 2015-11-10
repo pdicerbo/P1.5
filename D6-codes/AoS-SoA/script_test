@@ -1,0 +1,9 @@
+for PT in 200000 500000 1000000 2000000
+do
+for N_Iter in 1000 5000 10000 50000 100000 500000 1000000
+do
+	echo $N_Iter
+	./testSoA.x $PT $N_Iter | grep took | sed s/took/$PT'\t'$N_Iter/ |  awk '{print $5, $6, $7}' >> data_SoA
+	./testAoS.x $PT $N_Iter | grep took | sed s/took/$PT'\t'$N_Iter/ |  awk '{print $5, $6, $7}' >> data_AoS
+done
+done
