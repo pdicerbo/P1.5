@@ -2,8 +2,7 @@
 
 template <typename number>
 Vector<number>::Vector(const int n) 
-{
-    elements[n];
-};
+{ elements[n]; };
 
 template class Vector<double>;
+

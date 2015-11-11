@@ -1,5 +1,5 @@
 CXX=g++ #icpc
-CXXFLAGS= -O3  
+CXXFLAGS= -O3
 LIBS= 
 
 all: testAoS.x testSoA.x
