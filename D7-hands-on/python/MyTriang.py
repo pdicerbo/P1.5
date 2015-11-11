@@ -65,11 +65,13 @@ class TriaIterator:
         self.n = tria_acc.n_elems
 
     def __iter__(self):
+        # Decomment the two following lines to understand what appens
         # if self.i == 0:
         #     print("\n\tIn __iter__()")
         return self
 
     def __next__(self):
+        # Decomment the two following lines to understand what appens
         # if self.i == 0:
         #     print("\n\tIn __next__()")
         if self.i < self.n:

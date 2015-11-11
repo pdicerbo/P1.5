@@ -10,6 +10,7 @@ TIt = TriaIterator(TAcc)
 
 plt.figure()
 
+print("\n\tstarting loop:")
 for MyIt in TIt:
     X = np.append(TAcc.get_nodes_x(), TAcc.get_nodes_x()[0])
     Y = np.append(TAcc.get_nodes_y(), TAcc.get_nodes_y()[0])
