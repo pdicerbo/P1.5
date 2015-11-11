@@ -7,3 +7,4 @@ Vector<number>::Vector(const int n)
 };
 
 template class Vector<double>;
+//template class Vector<int>;
