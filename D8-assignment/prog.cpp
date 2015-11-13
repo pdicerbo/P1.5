@@ -9,15 +9,16 @@ using namespace std;
 
 int main(int argc, char** argv){
 
-  // rvector<double> AA(4);
+  rvector<double> AA(4);
  
-  // AA(0, 0) = -3.;
-  // AA(1, 0) = 42.;
-  // AA(2, 0) = -5.;
-  // AA(3, 0) = 3.14;
-  // lvector<double> AB(4);
-  // AB = AA;
-
+  AA(0, 0) = -3.;
+  AA(1, 0) = 42.;
+  AA(2, 0) = -5.;
+  AA(3, 0) = 3.14;
+  lvector<double> AB(4);
+  AB = AA;
+  AA.self_print();
+  AB.self_print();
   // // AB(0, 1) = -3.;
   // // AB(0, 2) = 42.;
   // // AB(0, 3) = -5.;
@@ -32,13 +33,13 @@ int main(int argc, char** argv){
   M(1,1) = 0.;
   M.self_print();
 
-  double* res = M.eigenvalues();
+  lvector<double> res = M.eigenvalues();
   Matrix<double> eig = M.eigenvectors();
-  cout << "\n\tres[0] = " << res[0] << ";  res[1] = " << res[1] << endl;
+  cout << "\n\tres[0] = " << res.matrix[0] << ";  res[1] = " << res.matrix[1] << endl;
+  cout << "\n\tCalling self_print() on lvector:\n";
+  res.self_print();
   eig.self_print();
   cout << "\tExit\n";
-
-  delete[] res;
 
   return 0;
 }

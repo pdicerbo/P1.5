@@ -3,6 +3,7 @@
 #include <fstream>
 #include "lapacke.h"
 #include "MyMatrix.h"
+#include "lvector.h"
 
 #ifdef USEBLAS
 #include "cblas.h"
@@ -339,23 +340,22 @@ void Matrix<MyType>::non_zero_init(){
 }
 
 template<typename MyType>
-MyType* Matrix<MyType>::eigenvalues() const{
-  // Matrix<MyType> temp = *this;
-  //  int n = temp.get_row();
-  MyType* res = new MyType[1];
+lvector<MyType> Matrix<MyType>::eigenvalues() const{
 
+  lvector<MyType> ret(1);
+  
   cout << "\n\tNot able to calculate eigenvalues of this data type\n";
   
-  return res;
+  return ret;
 }
 
 template<>
-double* Matrix<double>::eigenvalues() const{
+lvector<double> Matrix<double>::eigenvalues() const{
   Matrix<double> temp = *this;
   int n = temp.get_row(), info;
-  double* res = new double[n];
+  lvector<double> res(n);
 
-  info = LAPACKE_dsyev(LAPACK_ROW_MAJOR, 'N', 'U', n, temp.matrix, n, res);
+  info = LAPACKE_dsyev(LAPACK_ROW_MAJOR, 'N', 'U', n, temp.matrix, n, res.matrix);
   if(info > 0)
     cout << "\n\tError in eigenvalues calculation\n";
 
@@ -363,12 +363,12 @@ double* Matrix<double>::eigenvalues() const{
 }
 
 template<>
-float* Matrix<float>::eigenvalues() const{
+lvector<float> Matrix<float>::eigenvalues() const{
   Matrix<float> temp = *this;
   int n = temp.get_row(), info;
-  float* res = new float[n];
+  lvector<float> res(n);
 
-  info = LAPACKE_ssyev(LAPACK_ROW_MAJOR, 'N', 'U', n, temp.matrix, n, res);
+  info = LAPACKE_ssyev(LAPACK_ROW_MAJOR, 'N', 'U', n, temp.matrix, n, res.matrix);
   if(info > 0)
     cout << "\n\tError in eigenvalues calculation\n";
 

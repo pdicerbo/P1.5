@@ -36,13 +36,11 @@ lvector<T>& lvector<T>::operator=(const rvector<T>& obj){
 #ifdef DEBUG
   cout << "\n\tCalling custom assignment operator\n";
 #endif
-
+  Matrix<T>::operator=(obj);
   int nc = obj.get_row();
   this -> set_row(1);
   this -> set_col(nc);
-  
-  for(int i = 0; i < nc; i++)
-    this -> matrix[i] = obj.matrix[i];
+
   return *this;
 }
 

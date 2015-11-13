@@ -2,6 +2,7 @@
 #define MYMATRIX_HEADER
 
 #include <fstream>
+template <typename MyType> class lvector;
 
 template <typename MyType>
 class Matrix
@@ -29,7 +30,7 @@ class Matrix
   operator MyType() const;
   void print_to_file(std::ofstream &) const;
   void non_zero_init();
-  MyType* eigenvalues() const;
+  lvector<MyType> eigenvalues() const;
   Matrix eigenvectors() const;
  protected:
   Matrix();

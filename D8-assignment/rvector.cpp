@@ -36,21 +36,18 @@ rvector<T>& rvector<T>::operator=(const lvector<T>& obj){
 #ifdef DEBUG
   cout << "\n\tCalling custom assignment operator\n";
 #endif
-
+  Matrix<T>::operator=(obj);
   int nr = obj.get_col();
   this -> set_row(nr);
   this -> set_col(1);
 
-  for(int i = 0; i < nr; i++)
-    this -> matrix[i] = obj.matrix[i];
   return *this;
 }
 
 // norm function
 template<typename T>
 T rvector<T>::norm() const{
-  T norm = 0;
-  T tmp;
+  T norm = 0, tmp;
   int n_r = this -> get_row();
   for(int i = 0; i < n_r; i++){
     tmp = this -> matrix[i];
