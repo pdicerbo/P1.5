@@ -32,6 +32,7 @@ class Matrix
   void non_zero_init();
   lvector<MyType> eigenvalues() const;
   Matrix eigenvectors() const;
+  MyType determinant() const;
  protected:
   Matrix();
 };

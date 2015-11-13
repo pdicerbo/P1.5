@@ -413,6 +413,20 @@ Matrix<float> Matrix<float>::eigenvectors() const{
   return temp;
 }
 
+template <typename MyType>
+MyType Matrix<MyType>::determinant() const{
+  
+  lvector<MyType> ev = this -> eigenvalues();
+  int n = ev.get_col();
+
+  MyType det = 1.;
+
+  for(int i = 0; i < n; i++)
+    det *= ev(i); //(0, i);
+
+  return det;
+}
+
 template class Matrix<double>;
 template class Matrix<float>;
 template class Matrix<int>;

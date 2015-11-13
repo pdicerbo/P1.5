@@ -44,6 +44,11 @@ rvector<T>& rvector<T>::operator=(const lvector<T>& obj){
   return *this;
 }
 
+template<typename T>
+T& rvector<T>::operator()(const int i){
+  return Matrix<T>::operator()(i, 0);
+}
+
 // norm function
 template<typename T>
 T rvector<T>::norm() const{

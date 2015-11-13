@@ -14,6 +14,7 @@ class rvector : public Matrix<T>{
   ~rvector();
   rvector(const lvector<T>&);
   rvector& operator=(const lvector<T>&);
+  T& operator()(const int);
   T norm() const;
   void normalize();
 };

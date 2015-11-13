@@ -11,10 +11,10 @@ int main(int argc, char** argv){
 
   rvector<double> AA(4);
  
-  AA(0, 0) = -3.;
-  AA(1, 0) = 42.;
-  AA(2, 0) = -5.;
-  AA(3, 0) = 3.14;
+  AA(0) = -3.;
+  AA(1) = 42.;
+  AA(2) = -5.;
+  AA(3) = 3.14;
   lvector<double> AB(4);
   AB = AA;
   
@@ -27,11 +27,13 @@ int main(int argc, char** argv){
   // // AB(0, 4) = 3.14;
   
   SquareMatrix<double> M(2);
+
   // M.initialize("identity");
   M(0,0) = 0.;
   M(0,1) = 1.;
   M(1,0) = 1.;
   M(1,1) = 0.;
+
   M.self_print();
 
   lvector<double> res = M.eigenvalues();
@@ -40,6 +42,9 @@ int main(int argc, char** argv){
   cout << "\n\tCalling self_print() on lvector:\n";
   res.self_print();
   eig.self_print();
+
+  cout << "\n\tPrinting determinant: " << M.determinant() << endl;
+
   cout << "\tExit\n";
 
   return 0;
