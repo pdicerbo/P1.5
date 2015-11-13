@@ -17,14 +17,15 @@ int main(int argc, char** argv){
   AA(3, 0) = 3.14;
   lvector<double> AB(4);
   AB = AA;
+  
   AA.self_print();
   AB.self_print();
+
   // // AB(0, 1) = -3.;
   // // AB(0, 2) = 42.;
   // // AB(0, 3) = -5.;
   // // AB(0, 4) = 3.14;
   
-  // AB.self_print();
   SquareMatrix<double> M(2);
   // M.initialize("identity");
   M(0,0) = 0.;
