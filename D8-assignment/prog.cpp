@@ -3,7 +3,6 @@
 #include "MyMatrix.h"
 #include "MySquareMatrix.h"
 #include "MyVectors.h"
-#include "FactoryMatrix.h"
 
 using namespace std;
 
@@ -15,17 +14,13 @@ int main(int argc, char** argv){
   AA(1) = 42.;
   AA(2) = -5.;
   AA(3) = 3.14;
+
   lvector<double> AB(4);
   AB = AA;
   
-  AA.self_print();
-  AB.self_print();
+  // AA.self_print();
+  // AB.self_print();
 
-  // // AB(0, 1) = -3.;
-  // // AB(0, 2) = 42.;
-  // // AB(0, 3) = -5.;
-  // // AB(0, 4) = 3.14;
-  
   SquareMatrix<double> M(2);
 
   // M.initialize("identity");
@@ -33,23 +28,24 @@ int main(int argc, char** argv){
   M(0,1) = 1.;
   M(1,0) = 1.;
   M(1,1) = 0.;
-
+  
+  cout << "\n\tMatrix:\n";
   M.self_print();
 
   lvector<double> res = M.eigenvalues();
   Matrix<double> eig = M.eigenvectors();
-  cout << "\n\tres[0] = " << res.matrix[0] << ";  res[1] = " << res.matrix[1] << endl;
-  cout << "\n\tCalling self_print() on lvector:\n";
+  cout << "\n\tEigenvalues:\n";
   res.self_print();
+  cout << "\n\tEigenvectors:\n";
   eig.self_print();
 
-  cout << "\n\tPrinting determinant: " << M.determinant() << endl;
+  cout << "\n\tDeterminant: " << M.determinant() << endl;
 
   Matrix<float> tr(2, 3);
   tr.initialize("generic");
   tr.self_print();
   tr.transpose().self_print();
-  
+  cout << "\n\tDeterminant: " << tr.determinant() << endl;
   cout << "\tExit\n";
 
   return 0;

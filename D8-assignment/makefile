@@ -1,10 +1,11 @@
 CC=g++
-CFLAGS=-Wall #-DDEBUG
+CFLAGS=-Wall -DUSEBLAS #-DDEBUG
 LIBS=-lcblas -llapacke
+DOT_O = prog.o MyMatrix.o MySquareMatrix.o rvector.o lvector.o
 
 all=prog.x
 
-prog.x: prog.o MyMatrix.o MySquareMatrix.o FactoryMatrix.o rvector.o lvector.o
+prog.x: ${DOT_O}
 	$(CC) $^ $(LIBS) -o $@
 
 prog.o: prog.cpp

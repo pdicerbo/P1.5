@@ -415,7 +415,11 @@ Matrix<float> Matrix<float>::eigenvectors() const{
 
 template <typename MyType>
 MyType Matrix<MyType>::determinant() const{
-  
+  if(row_ != col_){
+    cout << "\n\tWarning! Non squared matrix call determinant method\n\treturn 0\n";
+    return 0;
+  }
+
   lvector<MyType> ev = this -> eigenvalues();
   int n = ev.get_col();
 
