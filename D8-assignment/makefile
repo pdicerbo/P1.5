@@ -1,6 +1,6 @@
 CC=g++
 CFLAGS=-Wall #-DDEBUG
-LIBS=-lcblas
+LIBS=-lcblas -llapacke
 
 all=prog.x
 

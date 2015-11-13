@@ -17,4 +17,4 @@ class SquareMatrix : public Matrix<MyType>
  protected:
   SquareMatrix();
 };
-#endif
+#endif /* MY_SQUARE_MATRIX_HEADER */

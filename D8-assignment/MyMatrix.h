@@ -13,6 +13,8 @@ class Matrix
   MyType* matrix;
   int get_row() const;
   int get_col() const;
+  void set_row(int);
+  void set_col(int);
   Matrix(int, int);
   virtual ~Matrix();
   Matrix(const Matrix&);
@@ -27,7 +29,9 @@ class Matrix
   operator MyType() const;
   void print_to_file(std::ofstream &) const;
   void non_zero_init();
+  MyType* eigenvalues() const;
+  Matrix eigenvectors() const;
  protected:
   Matrix();
 };
-#endif
+#endif /* MYMATRIX_HEADER */

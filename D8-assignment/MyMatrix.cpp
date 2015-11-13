@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <fstream>
+#include "lapacke.h"
 #include "MyMatrix.h"
 
 #ifdef USEBLAS
@@ -64,6 +65,16 @@ int Matrix<MyType>::get_row() const{
 template<typename MyType>
 int Matrix<MyType>::get_col() const{
   return col_;
+}
+
+template<typename MyType>
+void Matrix<MyType>::set_row(int a){
+  row_ = a;
+}
+
+template<typename MyType>
+void Matrix<MyType>::set_col(int a){
+  col_ = a;
 }
 
 // initialize
@@ -293,7 +304,7 @@ Matrix<MyType>::operator MyType() const{
 #endif
   
   if(row_ != 1 && col_ != 1)
-    cout << "\n\tWarning! You try to casting matrix with shape different from (1,1)\n\tReturn mat[0, 0]\n";
+    cout << "\n\tWarning! You try to cast matrix with shape different from (1,1)\n\tReturn mat[0, 0]\n";
 
   return matrix[0];
 }
@@ -325,6 +336,81 @@ void Matrix<MyType>::non_zero_init(){
   for(int i = 0; i < nrow; i++)
     for(int j = 0; j < ncol; j++)
       matrix[i*ncol + j] = i * ncol + j + 1.;
+}
+
+template<typename MyType>
+MyType* Matrix<MyType>::eigenvalues() const{
+  // Matrix<MyType> temp = *this;
+  //  int n = temp.get_row();
+  MyType* res = new MyType[1];
+
+  cout << "\n\tNot able to calculate eigenvalues of this data type\n";
+  
+  return res;
+}
+
+template<>
+double* Matrix<double>::eigenvalues() const{
+  Matrix<double> temp = *this;
+  int n = temp.get_row(), info;
+  double* res = new double[n];
+
+  info = LAPACKE_dsyev(LAPACK_ROW_MAJOR, 'N', 'U', n, temp.matrix, n, res);
+  if(info > 0)
+    cout << "\n\tError in eigenvalues calculation\n";
+
+  return res;
+}
+
+template<>
+float* Matrix<float>::eigenvalues() const{
+  Matrix<float> temp = *this;
+  int n = temp.get_row(), info;
+  float* res = new float[n];
+
+  info = LAPACKE_ssyev(LAPACK_ROW_MAJOR, 'N', 'U', n, temp.matrix, n, res);
+  if(info > 0)
+    cout << "\n\tError in eigenvalues calculation\n";
+
+  return res;
+}
+
+template<typename MyType>
+Matrix<MyType> Matrix<MyType>::eigenvectors() const{
+
+  cout << "\n\tNot able to calculate eigenvectors of this data type\n";
+
+  return *this;
+}
+
+template<>
+Matrix<double> Matrix<double>::eigenvectors() const{
+  Matrix<double> temp = *this;
+  int n = temp.get_row(), info;
+  double* res = new double[n];
+
+  info = LAPACKE_dsyev(LAPACK_ROW_MAJOR, 'V', 'U', n, temp.matrix, n, res);
+  if(info > 0)
+    cout << "\n\tError in eigenvalues calculation\n";
+
+  delete [] res;
+
+  return temp;
+}
+
+template<>
+Matrix<float> Matrix<float>::eigenvectors() const{
+  Matrix<float> temp = *this;
+  int n = temp.get_row(), info;
+  float* res = new float[n];
+
+  info = LAPACKE_ssyev(LAPACK_ROW_MAJOR, 'V', 'U', n, temp.matrix, n, res);
+  if(info > 0)
+    cout << "\n\tError in eigenvalues calculation\n";
+
+  delete [] res;
+
+  return temp;
 }
 
 template class Matrix<double>;

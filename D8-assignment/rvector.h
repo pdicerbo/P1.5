@@ -4,14 +4,16 @@
 #include "MyMatrix.h"
 
 template <typename T>
+class lvector;
 
-//class lvector<T>;
-
+template<typename T>
 class rvector : public Matrix<T>{
 
  public:
   rvector(int);
   ~rvector();
+  rvector(const lvector<T>&);
+  rvector& operator=(const lvector<T>&);
   T norm() const;
   void normalize();
 };

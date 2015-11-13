@@ -1,10 +1,11 @@
 #include <iostream>
 #include <cmath>
 #include "lvector.h"
-
+#include "rvector.h"
 
 using namespace std;
 
+// custom lvector constructor
 template<typename T>
 lvector<T>::lvector(int a) : Matrix<T>(1, a){
 #ifdef DEBUG
@@ -12,6 +13,7 @@ lvector<T>::lvector(int a) : Matrix<T>(1, a){
 #endif
 }
 
+// lvector distructor
 template<typename T>
 lvector<T>::~lvector(){
 #ifdef DEBUG
@@ -19,6 +21,32 @@ lvector<T>::~lvector(){
 #endif
 }
 
+// lvector custom copy constructor
+template<typename T>
+lvector<T>::lvector(const rvector<T>& obj) : Matrix<T>(obj){
+#ifdef DEBUG
+  cout << "\n\tCalling custom lvector copy constructor\n";
+#endif
+  this -> set_row(1);
+  this -> set_col(obj.get_row());
+}
+
+template<typename T>
+lvector<T>& lvector<T>::operator=(const rvector<T>& obj){
+#ifdef DEBUG
+  cout << "\n\tCalling custom assignment operator\n";
+#endif
+
+  int nc = obj.get_row();
+  this -> set_row(1);
+  this -> set_col(nc);
+  
+  for(int i = 0; i < nc; i++)
+    this -> matrix[i] = obj.matrix[i];
+  return *this;
+}
+
+// norm function
 template<typename T>
 T lvector<T>::norm() const{
   T norm = 0, tmp;
@@ -28,7 +56,6 @@ T lvector<T>::norm() const{
     tmp *= tmp;
     norm += tmp;
   }
-  
   return sqrt(norm);
 }
 

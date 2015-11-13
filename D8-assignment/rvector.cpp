@@ -1,9 +1,11 @@
 #include <iostream>
 #include <cmath>
 #include "rvector.h"
+#include "lvector.h"
 
 using namespace std;
 
+// custom rvector constructor
 template<typename T>
 rvector<T>::rvector(int a) : Matrix<T>(a, 1){
 #ifdef DEBUG
@@ -11,6 +13,7 @@ rvector<T>::rvector(int a) : Matrix<T>(a, 1){
 #endif
 }
 
+// rvector distructor
 template<typename T>
 rvector<T>::~rvector(){
 #ifdef DEBUG
@@ -18,6 +21,32 @@ rvector<T>::~rvector(){
 #endif
 }
 
+// rvector custom copy constructor
+template<typename T>
+rvector<T>::rvector(const lvector<T>& obj) : Matrix<T>(obj){
+#ifdef DEBUG
+  cout << "\n\tCalling custom rvector copy constructor\n";
+#endif
+  this -> set_row(obj.get_col());
+  this -> set_col(1);
+}
+
+template<typename T>
+rvector<T>& rvector<T>::operator=(const lvector<T>& obj){
+#ifdef DEBUG
+  cout << "\n\tCalling custom assignment operator\n";
+#endif
+
+  int nr = obj.get_col();
+  this -> set_row(nr);
+  this -> set_col(1);
+
+  for(int i = 0; i < nr; i++)
+    this -> matrix[i] = obj.matrix[i];
+  return *this;
+}
+
+// norm function
 template<typename T>
 T rvector<T>::norm() const{
   T norm = 0;
@@ -31,6 +60,7 @@ T rvector<T>::norm() const{
   return sqrt(norm);
 }
 
+// normalize function
 template<typename T>
 void rvector<T>::normalize(){
   T norm = this -> norm();

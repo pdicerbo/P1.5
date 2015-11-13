@@ -3,15 +3,18 @@
 
 #include "MyMatrix.h"
 
+/* template class rvector; */
+template<typename T>
+class rvector;
+
 template <typename T>
-
-//class lvector<T>;
-
 class lvector : public Matrix<T>{
 
  public:
   lvector(int);
   ~lvector();
+  lvector(const rvector<T>&);
+  lvector& operator=(const rvector<T>&);
   T norm() const;
   void normalize();
 };
