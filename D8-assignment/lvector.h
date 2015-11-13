@@ -12,7 +12,8 @@ class lvector : public Matrix<T>{
  public:
   lvector(int);
   ~lvector();
-
+  T norm() const;
+  void normalize();
 };
 
 #endif /* LVECTOR_HEADER */

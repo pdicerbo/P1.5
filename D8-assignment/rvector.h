@@ -12,7 +12,8 @@ class rvector : public Matrix<T>{
  public:
   rvector(int);
   ~rvector();
-
+  T norm() const;
+  void normalize();
 };
 
 #endif /* RVECTOR_HEADER */

@@ -287,6 +287,18 @@ MyType Matrix<MyType>::trace(){
 }
 
 template<typename MyType>
+Matrix<MyType>::operator MyType() const{
+#ifdef DEBUG
+  cout << "\n\tCalling cast operator\n";
+#endif
+  
+  if(row_ != 1 && col_ != 1)
+    cout << "\n\tWarning! You try to casting matrix with shape different from (1,1)\n\tReturn mat[0, 0]\n";
+
+  return matrix[0];
+}
+
+template<typename MyType>
 void Matrix<MyType>::print_to_file(ofstream &output) const{
 
   int nrow = get_row();

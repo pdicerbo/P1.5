@@ -32,7 +32,10 @@ int main(int argc, char** argv){
   a.self_print();
   Matrix<double> ct = AB*M*AA;
   ct.self_print();
-
+  cout << M;
+  
+  double nn = AA.norm();
+  cout << "\n\t" << nn << "\t" << nn*nn << endl;
   cout << "\tExit\n";
   // vector< Matrix<double>* > vec;
 
