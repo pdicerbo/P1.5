@@ -1,0 +1,38 @@
+    def load_msh(filename):
+        f = open ( filename , 'r')
+
+        x = np.array([])
+        y = np.array([])
+        topo = np.array([], dtype=int)
+
+        for line in f:
+            #print line[0]
+            if line[0]!='$':
+                l = map(float,line.split())
+                if len(l) == 4:
+                    x = np.append(x,l[1])
+                    y = np.append(y,l[2])
+                    #print 'ciao'
+                elif len(l) == 8:
+                    row = l[5:8]
+                    row = np.array(row, dtype=int)
+                    topo = np.append(topo,row)
+                    #print row
+                #    
+                #print len(l)
+        topo = np.reshape(topo,(len(topo)/3,3))
+        #print topo	
+        topo = topo-1
+        r_id = 0 
+        for row in topo:
+            ck =      (x[row[1]]-x[row[0]])*(y[row[2]]-y[row[0]])
+            ck = ck - (x[row[2]]-x[row[0]])*(y[row[1]]-y[row[0]])
+            if ck < 0:
+                topo[r_id,:] = np.array([[row[0],row[2],row[1]]])
+            r_id+=1
+        print '---------------------'
+        print 'mesh: '+filename+', loaded.'
+        print '# elems: '+str(topo.shape[0])
+        print '# nodes: '+str(x.shape[0])
+        print '---------------------'
+        return
