@@ -427,6 +427,18 @@ MyType Matrix<MyType>::determinant() const{
   return det;
 }
 
+template <typename MyType>
+Matrix<MyType> Matrix<MyType>::transpose(){
+  int MyRow = this -> get_row();
+  int MyCol = this -> get_col();
+  Matrix<MyType> temp(MyCol, MyRow);
+
+  for(int i = 0; i < MyRow; i++)
+    for(int j = 0; j < MyCol; j++)
+      temp(j, i) = (*this)(i, j);
+  return temp;
+}
+
 template class Matrix<double>;
 template class Matrix<float>;
 template class Matrix<int>;

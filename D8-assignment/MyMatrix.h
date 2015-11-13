@@ -1,7 +1,7 @@
 #ifndef MYMATRIX_HEADER
 #define MYMATRIX_HEADER
-
 #include <fstream>
+
 template <typename MyType> class lvector;
 
 template <typename MyType>
@@ -33,6 +33,7 @@ class Matrix
   lvector<MyType> eigenvalues() const;
   Matrix eigenvectors() const;
   MyType determinant() const;
+  Matrix transpose();
  protected:
   Matrix();
 };

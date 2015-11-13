@@ -45,6 +45,11 @@ int main(int argc, char** argv){
 
   cout << "\n\tPrinting determinant: " << M.determinant() << endl;
 
+  Matrix<float> tr(2, 3);
+  tr.initialize("generic");
+  tr.self_print();
+  tr.transpose().self_print();
+  
   cout << "\tExit\n";
 
   return 0;
