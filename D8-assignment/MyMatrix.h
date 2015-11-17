@@ -11,6 +11,7 @@ class Matrix
   int row_, col_;
 
  public:
+  // matrix could be private or protected, since there is operator()(const int,const int)
   MyType* matrix;
   int get_row() const;
   int get_col() const;
@@ -33,6 +34,7 @@ class Matrix
   lvector<MyType> eigenvalues() const;
   Matrix eigenvectors() const;
   MyType determinant() const;
+  // this could be marked as const
   Matrix transpose();
  protected:
   Matrix();

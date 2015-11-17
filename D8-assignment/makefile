@@ -1,6 +1,6 @@
 CC=g++
 CFLAGS=-Wall -DUSEBLAS #-DDEBUG
-LIBS=-lcblas -llapacke
+LIBS=-lblas -llapacke
 DOT_O = prog.o MyMatrix.o MySquareMatrix.o rvector.o lvector.o
 
 all=prog.x
